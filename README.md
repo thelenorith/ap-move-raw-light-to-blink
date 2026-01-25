@@ -96,7 +96,3 @@ Within each stage directory, targets are organized as subdirectories. Each targe
     - `FILTER_<filter_name>_EXP_<exposure_seconds>/` - One subdirectory per filter/exposure combination (non-mosaic)
     - `FILTER_<filter_name>_EXP_<exposure_seconds>_PANEL_N/` - For mosaics, PANEL identifier is appended to the filter directory name (uses PANEL keyword in WBPP)
     - Master darks and flats for that night (duplicated here for convenience)
-
-- **`master/`** - Processed master lights, organized as:
-  - `CCYY-MM-DD/` - Date the master was created
-    - `1x/`, `2x/`, etc. - Drizzle level subdirectories

@@ -28,9 +28,10 @@ classifiers = [
 ]
 
 dependencies = [
-    "ap-common",
     "astropy",
     "xisf==0.9.5",
+    # ap-common from git repository
+    "ap-common @ git+https://github.com/jewzaam/ap-common.git",
 ]
 
 [project.scripts]

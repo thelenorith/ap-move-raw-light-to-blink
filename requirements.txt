@@ -1,0 +1,7 @@
+# Requirements file for ap-copy-lights
+# This file can be used as an alternative to pyproject.toml dependencies
+
+astropy
+xisf==0.9.5
+# ap-common from git repository
+git+https://github.com/jewzaam/ap-common.git

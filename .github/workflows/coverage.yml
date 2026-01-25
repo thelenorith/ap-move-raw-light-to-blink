@@ -25,6 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # ap-common will be installed automatically via pyproject.toml dependencies
         python -m pip install -e ".[dev]"
     
     - name: Generate coverage report

@@ -12,7 +12,9 @@ def _get_version() -> str:
     if pyproject_path.exists():
         try:
             content = pyproject_path.read_text(encoding="utf-8")
-            match = re.search(r'^version\s*=\s*["\']([^"\']+)["\']', content, re.MULTILINE)
+            match = re.search(
+                r'^version\s*=\s*["\']([^"\']+)["\']', content, re.MULTILINE
+            )
             if match:
                 return match.group(1)
         except Exception:

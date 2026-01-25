@@ -93,29 +93,10 @@ Within each stage directory, targets are organized as subdirectories. Each targe
 
 - **`accept/`** - All lights that survived blink, organized as:
   - `DATE_CCYY-MM-DD/` - One subdirectory per day
-    - `FILTER_<filter_name>_EXP_<exposure_seconds>/` - One subdirectory per filter/exposure combination
+    - `FILTER_<filter_name>_EXP_<exposure_seconds>/` - One subdirectory per filter/exposure combination (non-mosaic)
+    - `FILTER_<filter_name>_EXP_<exposure_seconds>_PANEL_N/` - For mosaics, PANEL identifier is appended to the filter directory name (uses PANEL keyword in WBPP)
     - Master darks and flats for that night (duplicated here for convenience)
-  - `PANEL_N/` - For mosaics, one subdirectory per panel (uses PANEL keyword in WBPP)
 
 - **`master/`** - Processed master lights, organized as:
   - `CCYY-MM-DD/` - Date the master was created
     - `1x/`, `2x/`, etc. - Drizzle level subdirectories
-
-### Workflow Notes
-
-- **Master calibration files**: Master darks and flats are copied into each DATE directory within `accept/`. This duplication ensures you never lose reference data even if the dark library is deleted, and makes WBPP setup simple (just load the entire `accept` directory).
-
-- **Calibrated files**: Not kept - they're created in a temporary directory and deleted after use. Only raw lights with master darks/flats are retained.
-
-- **Moving between stages**: After blinking and accepting lights in a target directory, delete unwanted files and move the entire target directory (including `accept` and `master` subdirectories) to the next stage.
-
-The workflow is organized by target, with numbered stage directories tracking the current state of each target's processing pipeline.
-
-## File Structure
-
-```
-ap_move_lights/
-  ├── __init__.py
-  ├── move_lights.py  # Main script
-  └── config.py       # Project-specific configuration
-```

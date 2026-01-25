@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ap-copy-lights"
+name = "ap-move-lights"
 version = "0.1.0"
-description = "Copy and organize astrophotography files from raw directory to destination based on FITS header metadata"
+description = "Move and organize astrophotography files from raw directory to destination based on FITS header metadata"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "Apache-2.0"}
@@ -35,7 +35,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ap-copy-lights = "ap_copy_lights.copy_lights:main"
+ap-move-lights = "ap_move_lights.move_lights:main"
 
 [project.optional-dependencies]
 dev = [
@@ -46,7 +46,7 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["ap_copy_lights"]
+packages = ["ap_move_lights"]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md"]

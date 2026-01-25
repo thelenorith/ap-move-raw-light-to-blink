@@ -17,24 +17,24 @@ install-deps:
 	$(PYTHON) -m pip install -e ".[dev]"
 
 uninstall:
-	$(PYTHON) -m pip uninstall -y ap-copy-lights
+	$(PYTHON) -m pip uninstall -y ap-move-lights
 
 # Development targets
 clean:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg-info
-	rm -rf ap_copy_lights.egg-info
+	rm -rf ap_move_lights.egg-info
 	find . -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
 	find . -type f -name "*.pyc" -delete 2>/dev/null || true
 
 # Format code with black
 format: install-dev
-	$(PYTHON) -m black ap_copy_lights tests
+	$(PYTHON) -m black ap_move_lights tests
 
 # Lint code with flake8 (disable multiprocessing to avoid sandbox issues, match black line length)
 lint: install-dev
-	$(PYTHON) -m flake8 --jobs=1 --max-line-length=88 --extend-ignore=E203,E266,E501,W503,F401,W605,E722 ap_copy_lights tests
+	$(PYTHON) -m flake8 --jobs=1 --max-line-length=88 --extend-ignore=E203,E266,E501,W503,F401,W605,E722 ap_move_lights tests
 
 # Testing (install deps first, then run tests)
 test: install-dev
@@ -44,8 +44,8 @@ test-verbose: install-dev
 	$(PYTHON) -m pytest -v
 
 test-coverage: install-dev
-	$(PYTHON) -m pytest --cov=ap_copy_lights --cov-report=html --cov-report=term
+	$(PYTHON) -m pytest --cov=ap_move_lights --cov-report=html --cov-report=term
 
 # Coverage report (terminal output only)
 coverage: install-dev
-	$(PYTHON) -m pytest --cov=ap_copy_lights --cov-report=term
+	$(PYTHON) -m pytest --cov=ap_move_lights --cov-report=term

@@ -1,4 +1,4 @@
-# Requirements file for ap-copy-lights
+# Requirements file for ap-move-lights
 # This file can be used as an alternative to pyproject.toml dependencies
 
 astropy

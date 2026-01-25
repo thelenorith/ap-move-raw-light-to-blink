@@ -1,5 +1,5 @@
 """
-ap-copy-lights: Copy and organize astrophotography files based on FITS header metadata.
+ap-move-lights: Move and organize astrophotography files based on FITS header metadata.
 """
 
 import re

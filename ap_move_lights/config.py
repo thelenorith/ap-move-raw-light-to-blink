@@ -1,5 +1,5 @@
 """
-Project-specific configuration constants for ap-copy-lights.
+Project-specific configuration constants for ap-move-lights.
 These are specific to this tool and not shared across projects.
 """
 

@@ -248,3 +248,6 @@ $RECYCLE.BIN/
 
 # obsidian
 .obsidian/
+
+# vscode
+.vscode/

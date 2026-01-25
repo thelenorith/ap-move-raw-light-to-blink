@@ -8,17 +8,6 @@ This tool reads FITS headers from astrophotography files and organizes them into
 
 ## Usage
 
-### Batch File
-
-```batch
-2a. PREPARE move and cull.bat <source_dir> <dest_dir>
-```
-
-Example:
-```batch
-2a. PREPARE move and cull.bat "D:\Raw\Astrophotography" "F:\Astrophotography\Data"
-```
-
 ### Command Line (After Installation)
 
 ```powershell

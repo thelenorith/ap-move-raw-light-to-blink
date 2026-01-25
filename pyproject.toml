@@ -8,15 +8,15 @@ version = "0.1.0"
 description = "Copy and organize astrophotography files from raw directory to destination based on FITS header metadata"
 readme = "README.md"
 requires-python = ">=3.8"
-license = {text = "MIT"}
+license = {text = "Apache-2.0"}
 authors = [
-    {name = "Your Name"}
+    {name = "Naveen Malik"}
 ]
 keywords = ["astrophotography", "fits", "file-organization"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -28,9 +28,10 @@ classifiers = [
 ]
 
 dependencies = [
-    "ap-common",
     "astropy",
     "xisf==0.9.5",
+    # ap-common from git repository
+    "ap-common @ git+https://github.com/jewzaam/ap-common.git",
 ]
 
 [project.scripts]

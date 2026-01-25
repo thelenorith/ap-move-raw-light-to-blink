@@ -8,16 +8,22 @@ and organizes them into the appropriate directory structure.
 
 import argparse
 import os
-import pathlib
+from pathlib import Path
 import re
 
 import ap_common
 from . import config
 
 
+class UnexpectedImageTypeError(Exception):
+    """Raised when an unexpected image type is encountered."""
+
+    pass
+
+
 def copy_files(
     source_dir: str, dest_dir: str, debug: bool = False, dryrun: bool = False
-):
+) -> None:
     """
     Copies files from source_dir to dest_dir, organizing them based on FITS header metadata.
 
@@ -63,7 +69,7 @@ def _copy_file_type(
     print_status: bool,
     debug: bool,
     dryrun: bool,
-):
+) -> None:
     """
     Copies files of a specific type from source to destination.
 
@@ -114,7 +120,7 @@ def _copy_file_type(
             "targetname",
         ]
     else:
-        raise Exception(f"unexpected image type: {file_type}")
+        raise UnexpectedImageTypeError(f"unexpected image type: {file_type}")
 
     # Get metadata for files matching the type
     data = ap_common.get_filtered_metadata(
@@ -171,7 +177,7 @@ def _copy_file_type(
         for t in re.findall("(.*)[\\\\\\/]DATE.*", filename_dest):
             if t not in target_dirs and not dryrun:
                 # Create the accept directory as we go, more idempotent overall (resilient to failures)
-                pathlib.Path(t + os.sep + config.DIRECTORY_ACCEPT).mkdir(
+                Path(t + os.sep + config.DIRECTORY_ACCEPT).mkdir(
                     parents=True, exist_ok=True
                 )
             target_dirs.add(t)
@@ -180,7 +186,7 @@ def _copy_file_type(
         print(f"\nCopied {count_files} {file_type} file(s)")
 
 
-def main():
+def main() -> None:
     """Main entry point for the command-line interface."""
     parser = argparse.ArgumentParser(
         description="Copy files from source directory to destination directory"

@@ -1,5 +1,13 @@
 # ap-move-lights
 
+[![Test](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/test.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/test.yml)
+[![Coverage](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/coverage.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/coverage.yml)
+[![Lint](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/lint.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/lint.yml)
+[![Format](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/format.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/format.yml)
+[![Typecheck](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/typecheck.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/typecheck.yml)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 A simple tool for moving and organizing astrophotography files from a raw directory to a destination directory, organizing them based on FITS header metadata.
 
 ## Overview

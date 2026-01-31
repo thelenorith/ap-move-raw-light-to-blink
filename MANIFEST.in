@@ -2,4 +2,4 @@ include README.md
 include LICENSE
 include Makefile
 include pyproject.toml
-recursive-include ap_copy_lights *.py
+recursive-include ap_move_lights *.py

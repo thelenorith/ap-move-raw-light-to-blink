@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 
 import ap_common
+from tqdm import tqdm
 from . import config
 
 
@@ -67,13 +68,11 @@ def move_files(
         printStatus=True,
     )
 
-    print("Moving LIGHT files..", end=".", flush=True)
-
     # Collect all "target" directories (parent of DATE) so can create "accept" sub-dirs
     target_dirs = set()
     count_files = 0
 
-    for datum in data.values():
+    for datum in tqdm(data.values(), desc="Moving LIGHT files", unit="files"):
         filename_src = datum["filename"]
 
         if "type" not in datum:
@@ -97,8 +96,6 @@ def move_files(
         )
 
         count_files += 1
-        if count_files % 50 == 0:
-            print(".", end="", flush=True)
 
         # Create accept directories for target directories
         if create_accept:
@@ -110,7 +107,7 @@ def move_files(
                     )
                 target_dirs.add(t)
 
-    print(f"\nMoved {count_files} LIGHT file(s)")
+    print(f"Moved {count_files} LIGHT file(s)")
 
     # Clean up empty directories in source
     print("Cleaning up empty directories...")

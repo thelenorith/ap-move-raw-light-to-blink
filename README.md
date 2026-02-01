@@ -1,4 +1,4 @@
-# ap-move-lights
+# ap-move-raw-light-to-blink
 
 [![Test](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/test.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/test.yml)
 [![Coverage](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/coverage.yml/badge.svg)](https://github.com/jewzaam/ap-move-raw-light-to-blink/actions/workflows/coverage.yml)
@@ -25,7 +25,7 @@ This tool is part of the astrophotography pipeline. For comprehensive documentat
 ## Usage
 
 ```powershell
-python -m ap_move_lights.move_lights <source_dir> <dest_dir> [--debug] [--dryrun] [--blink-dir DIR] [--accept-dir DIR] [--no-accept] [--help]
+python -m ap_move_raw_light_to_blink.move_lights <source_dir> <dest_dir> [--debug] [--dryrun] [--blink-dir DIR] [--accept-dir DIR] [--no-accept] [--help]
 ```
 
 Options:
@@ -49,7 +49,7 @@ make install-dev
 ### From Git
 
 ```bash
-pip install git+https://github.com/jewzaam/ap-move-lights.git
+pip install git+https://github.com/jewzaam/ap-move-raw-light-to-blink.git
 ```
 
 ## How It Works

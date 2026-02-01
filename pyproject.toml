@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ap-move-lights"
+name = "ap-move-raw-light-to-blink"
 version = "0.1.0"
 description = "Move and organize astrophotography files from raw directory to destination based on FITS header metadata"
 readme = "README.md"
@@ -33,7 +33,7 @@ dependencies = [
 ]
 
 [project.scripts]
-ap-move-lights = "ap_move_lights.move_lights:main"
+ap-move-raw-light-to-blink = "ap_move_raw_light_to_blink.move_lights:main"
 
 [project.optional-dependencies]
 dev = [
@@ -45,7 +45,7 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["ap_move_lights"]
+packages = ["ap_move_raw_light_to_blink"]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.md"]

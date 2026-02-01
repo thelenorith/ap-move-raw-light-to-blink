@@ -26,8 +26,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "astropy",
-    "tqdm",
+    "astropy>=6.0.0",
     "xisf==0.9.5",
     # ap-common from git repository
     "ap-common @ git+https://github.com/jewzaam/ap-common.git",

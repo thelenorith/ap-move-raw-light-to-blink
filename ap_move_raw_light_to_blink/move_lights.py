@@ -11,7 +11,6 @@ from pathlib import Path
 import re
 
 import ap_common
-from tqdm import tqdm
 from . import config
 
 
@@ -20,6 +19,7 @@ def move_files(
     dest_dir: str,
     debug: bool = False,
     dryrun: bool = False,
+    quiet: bool = False,
     blink_dir: str | None = None,
     accept_dir: str | None = None,
     create_accept: bool = True,
@@ -32,6 +32,7 @@ def move_files(
         dest_dir: Destination directory for organized files
         debug: Enable debug output
         dryrun: Perform dry run without actually moving files
+        quiet: Suppress progress output
         blink_dir: Directory name for LIGHT files (default: "10_Blink")
         accept_dir: Directory name for accept subdirectories (default: "accept")
         create_accept: Whether to create accept subdirectories (default: True)
@@ -72,7 +73,9 @@ def move_files(
     target_dirs = set()
     count_files = 0
 
-    for datum in tqdm(data.values(), desc="Moving LIGHT files", unit="files"):
+    for datum in ap_common.progress_iter(
+        data.values(), desc="Moving LIGHT files", unit="files", enabled=not quiet
+    ):
         filename_src = datum["filename"]
 
         if "type" not in datum:
@@ -127,6 +130,9 @@ def main() -> None:
     )
     parser.add_argument("--debug", action="store_true", help="Enable debug output")
     parser.add_argument(
+        "--quiet", "-q", action="store_true", help="Suppress progress output"
+    )
+    parser.add_argument(
         "--dryrun", action="store_true", help="Perform dry run without moving files"
     )
     parser.add_argument(
@@ -154,6 +160,7 @@ def main() -> None:
         dest_dir=args.dest_dir,
         debug=args.debug,
         dryrun=args.dryrun,
+        quiet=args.quiet,
         blink_dir=args.blink_dir,
         accept_dir=args.accept_dir,
         create_accept=not args.no_accept,

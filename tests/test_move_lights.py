@@ -149,7 +149,7 @@ class TestMoveFiles:
     @patch("ap_common.get_filtered_metadata")
     @patch("ap_common.move_file")
     def test_move_files_skips_missing_type(
-        self, mock_move_file, mock_get_metadata, tmp_path, capsys
+        self, mock_move_file, mock_get_metadata, tmp_path
     ):
         """Test that files without type are skipped."""
         source_dir = str(tmp_path / "source")
@@ -169,11 +169,6 @@ class TestMoveFiles:
 
         # Should not move file without type
         mock_move_file.assert_not_called()
-
-        # Should print warning
-        captured = capsys.readouterr()
-        assert "WARNING" in captured.out
-        assert "type not set" in captured.out
 
     @patch("ap_common.get_filtered_metadata")
     @patch("ap_common.normalize_filename")

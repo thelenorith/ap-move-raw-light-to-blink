@@ -6,12 +6,16 @@ organizing them based on FITS header metadata into a multi-stage workflow.
 """
 
 import argparse
+import logging
 import os
 from pathlib import Path
 import re
 
 import ap_common
+from ap_common.logging_config import setup_logging
 from . import config
+
+logger = logging.getLogger(__name__)
 
 
 def move_files(
@@ -79,7 +83,7 @@ def move_files(
         filename_src = datum["filename"]
 
         if "type" not in datum:
-            print(f"WARNING: type not set in datum, skipping: {datum}")
+            logger.warning(f"type not set in datum, skipping: {datum}")
             continue
 
         # Determine destination filename based on metadata (using BLINK directory)
@@ -110,10 +114,10 @@ def move_files(
                     )
                 target_dirs.add(t)
 
-    print(f"Moved {count_files} LIGHT file(s)")
+    logger.info(f"Moved {count_files} LIGHT file(s)")
 
     # Clean up empty directories in source
-    print("Cleaning up empty directories...")
+    logger.info("Cleaning up empty directories...")
     ap_common.delete_empty_directories(source_dir, dryrun=dryrun)
 
 
@@ -154,6 +158,9 @@ def main() -> None:
     )
 
     args = parser.parse_args()
+
+    # Setup logging
+    setup_logging(name="ap_move_raw_light_to_blink", debug=args.debug, quiet=args.quiet)
 
     move_files(
         source_dir=args.source_dir,

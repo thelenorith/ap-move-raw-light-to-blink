@@ -10,6 +10,7 @@ import logging
 import os
 from pathlib import Path
 import re
+import sys
 
 import ap_common
 from ap_common.logging_config import setup_logging
@@ -17,6 +18,9 @@ from ap_common.progress import ProgressTracker
 from . import config
 
 logger = logging.getLogger(__name__)
+
+EXIT_SUCCESS = 0
+EXIT_ERROR = 1
 
 # Set default description width for aligned progress bars
 ProgressTracker.set_default_desc_width(20)
@@ -33,7 +37,8 @@ def move_files(
     create_accept: bool = True,
 ) -> None:
     """
-    Moves LIGHT files from source_dir to dest_dir, organizing them based on FITS header metadata.
+    Moves LIGHT files from source_dir to dest_dir, organizing them
+    based on FITS header metadata.
 
     Args:
         source_dir: Source directory containing raw LIGHT files
@@ -112,7 +117,8 @@ def move_files(
         if create_accept:
             for t in re.findall("(.*)[\\\\\\/]DATE.*", filename_dest):
                 if t not in target_dirs and not dryrun:
-                    # Create the accept directory as we go, more idempotent overall (resilient to failures)
+                    # Create the accept directory as we go,
+                    # more idempotent overall (resilient to failures)
                     Path(t + os.sep + accept_directory).mkdir(
                         parents=True, exist_ok=True
                     )
@@ -166,16 +172,22 @@ def main() -> None:
     # Setup logging
     setup_logging(name="ap_move_raw_light_to_blink", debug=args.debug, quiet=args.quiet)
 
-    move_files(
-        source_dir=args.source_dir,
-        dest_dir=args.dest_dir,
-        debug=args.debug,
-        dryrun=args.dryrun,
-        quiet=args.quiet,
-        blink_dir=args.blink_dir,
-        accept_dir=args.accept_dir,
-        create_accept=not args.no_accept,
-    )
+    try:
+        move_files(
+            source_dir=args.source_dir,
+            dest_dir=args.dest_dir,
+            debug=args.debug,
+            dryrun=args.dryrun,
+            quiet=args.quiet,
+            blink_dir=args.blink_dir,
+            accept_dir=args.accept_dir,
+            create_accept=not args.no_accept,
+        )
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        sys.exit(EXIT_ERROR)
+
+    sys.exit(EXIT_SUCCESS)
 
 
 if __name__ == "__main__":

@@ -13,6 +13,19 @@ import re
 import sys
 
 import ap_common
+from ap_common.constants import (
+    NORMALIZED_HEADER_CAMERA,
+    NORMALIZED_HEADER_DATE,
+    NORMALIZED_HEADER_DATETIME,
+    NORMALIZED_HEADER_EXPOSURESECONDS,
+    NORMALIZED_HEADER_FILENAME,
+    NORMALIZED_HEADER_FILTER,
+    NORMALIZED_HEADER_FOCAL_RATIO,
+    NORMALIZED_HEADER_OPTIC,
+    NORMALIZED_HEADER_TARGETNAME,
+    NORMALIZED_HEADER_TYPE,
+    TYPE_LIGHT,
+)
 from ap_common.logging_config import setup_logging
 from ap_common.progress import ProgressTracker
 from . import config
@@ -58,16 +71,16 @@ def move_files(
 
     # Required properties for LIGHT files
     required_properties = [
-        "camera",
-        "type",
-        "date",
-        "exposureseconds",
-        "datetime",
-        "filename",
-        "optic",
-        "focal_ratio",
-        "filter",
-        "targetname",
+        NORMALIZED_HEADER_CAMERA,
+        NORMALIZED_HEADER_TYPE,
+        NORMALIZED_HEADER_DATE,
+        NORMALIZED_HEADER_EXPOSURESECONDS,
+        NORMALIZED_HEADER_DATETIME,
+        NORMALIZED_HEADER_FILENAME,
+        NORMALIZED_HEADER_OPTIC,
+        NORMALIZED_HEADER_FOCAL_RATIO,
+        NORMALIZED_HEADER_FILTER,
+        NORMALIZED_HEADER_TARGETNAME,
     ]
 
     # Get metadata for LIGHT files (recursive search, show status)
@@ -76,7 +89,7 @@ def move_files(
         patterns=[input_pattern],
         recursive=True,
         required_properties=required_properties,
-        filters={"type": "LIGHT"},
+        filters={NORMALIZED_HEADER_TYPE: TYPE_LIGHT},
         debug=debug,
         profileFromPath=False,
         printStatus=True,
@@ -89,9 +102,9 @@ def move_files(
     for datum in ap_common.progress_iter(
         data.values(), desc="Moving LIGHT files", unit="files", enabled=not quiet
     ):
-        filename_src = datum["filename"]
+        filename_src = datum[NORMALIZED_HEADER_FILENAME]
 
-        if "type" not in datum:
+        if NORMALIZED_HEADER_TYPE not in datum:
             logger.warning(f"type not set in datum, skipping: {datum}")
             continue
 

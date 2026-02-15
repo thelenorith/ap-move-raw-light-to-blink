@@ -20,7 +20,7 @@ This tool is part of the astrophotography pipeline. For comprehensive documentat
 ## Usage
 
 ```powershell
-python -m ap_move_raw_light_to_blink.move_lights <source_dir> <dest_dir> [--debug] [--dryrun] [--blink-dir DIR] [--accept-dir DIR] [--no-accept] [--help]
+python -m ap_move_raw_light_to_blink <source_dir> <dest_dir> [--debug] [--dryrun] [--quiet] [--blink-dir DIR] [--accept-dir DIR] [--no-accept] [--help]
 ```
 
 Options:
@@ -28,6 +28,7 @@ Options:
 - `dest_dir`: Destination directory for organized files
 - `--debug`: Enable debug output
 - `--dryrun`: Perform dry run without actually moving files
+- `--quiet` / `-q`: Suppress non-essential output
 - `--blink-dir DIR`: Directory name for LIGHT files (default: "10_Blink")
 - `--accept-dir DIR`: Directory name for accept subdirectories (default: "accept")
 - `--no-accept`: Do not create accept subdirectories
